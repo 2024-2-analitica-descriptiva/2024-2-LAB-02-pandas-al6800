@@ -6,6 +6,8 @@ librerias de pandas para resolver las preguntas.
 """
 
 
+import pandas as pd
+
 def pregunta_10():
     """
     Construya una tabla que contenga `c1` y una lista separada por ':' de los
@@ -20,3 +22,21 @@ def pregunta_10():
     D                   1:2:3:5:5:7
     E   1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
+
+    """
+    Construya una tabla que contenga `c1` y una lista separada por ':' de los
+    valores de la columna `c2` para el archivo `tbl0.tsv`.
+    """
+    # Leer el archivo tbl0.tsv
+    tbl0 = pd.read_csv("files/input/tbl0.tsv", sep="\t")
+    
+    # Agrupar por `c1`, ordenar `c2` y concatenar los valores de `c2` separados por ':'
+    result = tbl0.groupby('c1')['c2'].apply(lambda x: ':'.join(map(str, sorted(x)))).reset_index()
+    
+    # Establecer `c1` como índice
+    result.set_index('c1', inplace=True)
+
+    print(result) 
+    
+    # Devolver la tabla resultante
+    return result

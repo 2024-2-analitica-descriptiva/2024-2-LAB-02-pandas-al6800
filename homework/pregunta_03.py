@@ -6,6 +6,8 @@ librerias de pandas para resolver las preguntas.
 """
 
 
+import pandas as pd
+
 def pregunta_03():
     """
     ¿Cuál es la cantidad de registros por cada letra de la columna `c1` del
@@ -19,5 +21,14 @@ def pregunta_03():
     D     6
     E    14
     Name: count, dtype: int64
-
     """
+    # Leer el archivo tbl0.tsv
+    tbl0 = pd.read_csv("files/input/tbl0.tsv", sep="\t")
+    # Contar los registros por cada letra en la columna c1
+    resultado = tbl0["c1"].value_counts().sort_index()
+    return resultado
+
+# Llamar a la función y mostrar el resultado
+resultado = pregunta_03()
+print(resultado)
+
